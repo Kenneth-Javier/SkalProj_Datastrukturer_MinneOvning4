@@ -114,9 +114,10 @@ namespace SkalProj_Datastrukturer_MinneÖvning4
                       break;
           
                   case '0':
-                      Console.WriteLine("0 for Quit");
+                      Console.WriteLine("0 exit to main menue.");
                       menuIsRunning = false;
-                      Environment.Exit(0);
+                        //Environment.Exit(0);
+                        Main();
                       break;
           
                   default:
@@ -125,52 +126,65 @@ namespace SkalProj_Datastrukturer_MinneÖvning4
               }
           } while (menuIsRunning == true);
       }
-        static void TestQueue()
+
+        /// <summary>
+        /// Examines the datastructure Queue
+        /// </summary>
+        static void ExamineQueue()
         {
-
-        }
-
-      /// <summary>
-      /// Examines the datastructure Queue
-      /// </summary>
-      static void ExamineQueue()
-      {
             /*
              * Loop this method untill the user inputs something to exit to main menue.
              * Create a switch with cases to enqueue items or dequeue items
              * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
             */
-            Queue<string> examineQueue = new Queue<string> { };
-
-          bool menuIsRunning = true;
-          string input;
-          char firstChar;
-            Console.WriteLine($"Use 0 to quit");
+            Queue<string> q = new Queue<string> { };
+            q.Clear();
+            bool menuIsRunning = true;
+            string input;
+            char firstChar;
+            string sValue;
+            Console.WriteLine($"Use; + before name \nUse: - to remove first name from line \nUse: 0 to Quit");
             do
             {
                 input = Console.ReadLine();
                 firstChar = input[0];
+                sValue = input.Substring(1);
 
                 switch (firstChar)
                 {
+                    //add new element in line
+                    case '+':
+                        if (sValue.Length > 0) { q.Enqueue(sValue); Console.WriteLine($"{sValue} was Added to Queue and is now last of {q.Count} elements:"); }
+                        else if (sValue.Length < 1) { Console.WriteLine($"Nothing was Added after you typed + \nDo it Again!"); }
+                        break;
+
+                    //remove element from list
+                    case '-':
+                        if (q.Count > 0)
+                        { string toBeRemoved = q.Dequeue(); Console.WriteLine($"{toBeRemoved} was Removed from Queue, now {q.Count} elements in the Queue");}
+                        else if (q.Count < 1) { Console.WriteLine($"{q.Count} elements in the Queue.... Seems hard to remove someone from queue now"); }
+
+                        break;
+                    //user inputs something to exit to main menue.
                     case '0':
-                        Console.WriteLine("0 for Quit");
+                        Console.WriteLine("0 exit to main menue.");
                         menuIsRunning = false;
-                        Environment.Exit(0);
+                        //Environment.Exit(0);
+                        Main();
                         break;
 
                     default:
-                        Console.WriteLine($"Use only \nUse 0 to Quit");
+                        Console.WriteLine($"Use only + before name \nor - to remove first name from line \nUse 0 to Quit");
                         break;
                 }
 
             } while (menuIsRunning == true);
-      }
+        }
 
-      /// <summary>
-      /// Examines the datastructure Stack
-      /// </summary>
-      static void ExamineStack()
+        /// <summary>
+        /// Examines the datastructure Stack
+        /// </summary>
+        static void ExamineStack()
       {
           /*
            * Loop this method until the user inputs something to exit to main menue.
