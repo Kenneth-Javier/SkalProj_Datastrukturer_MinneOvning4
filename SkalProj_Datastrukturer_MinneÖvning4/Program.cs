@@ -82,35 +82,25 @@ namespace SkalProj_Datastrukturer_MinneÖvning4
               {
                   case '+':      // '+': Add the rest of the input to the list (The user could write +Adam and "Adam" would be added to the list)
                       if (sValue.Length > 0)
-                      {
-                          //Adds value by String content
-                          theList.Add(sValue);
-                          Console.WriteLine($"( {sValue} ) has been added to the list");
-                          Console.WriteLine($"List capacity {theList.Capacity}, \nList content of {theList.Count} elements:");// In both cases, look at the count and capacity of the list
+                      {   //Adds value by String content
+                          theList.Add(sValue); Console.WriteLine($"( {sValue} ) has been added to the list\n List capacity {theList.Capacity}, \nList content of {theList.Count} elements:");// In both cases, look at the count and capacity of the list
                           //prints content of list
-                          foreach (var item in theList)
-                          { Console.WriteLine($"({item})"); }
+                          foreach (var item in theList){ Console.WriteLine($"({item})");}
                       }
                       break;
           
                   case '-':      // '-': Remove the rest of the input from the list (The user could write -Adam and "Adam" would be removed from the list)
                       if (sValue.Length > 0)
-                      {
-                          //Removes value by String content
-                          if (theList.Remove(sValue))
-                          { Console.WriteLine($"( {sValue} ) has been removed from list "); }
-                          else if (!theList.Remove(sValue))
-                          { Console.WriteLine($"{sValue} has not been found, not able to be removed from list "); }
+                      {   //Removes value by String content
+                          if (theList.Remove(sValue)) { Console.WriteLine($"( {sValue} ) has been Removed from list "); }
+                          else if (!theList.Remove(sValue)){ Console.WriteLine($"{sValue} has not been found, not able to be removed from list "); }
                           // In both cases, look at the count and capacity of the list
                           Console.WriteLine($"List capacity {theList.Capacity}, \nList content of {theList.Count} elements:");
                           //prints content of list
-                          foreach (var item in theList)
-                          { Console.WriteLine($"({item})"); }
+                          foreach (var item in theList){ Console.WriteLine($"({item})"); }
                       }
                       else if (sValue.Length < 0)
-                      {
-                          Console.WriteLine($"use only + or - before name. Examle: (+Adam) to add or (-Adam) to remove Adam ");
-                      }
+                      {Console.WriteLine($"use only + or - before name. Examle: (+Adam) to add or (-Adam) to remove Adam "); }
                       break;
           
                   case '0':
@@ -153,16 +143,19 @@ namespace SkalProj_Datastrukturer_MinneÖvning4
                 {
                     //add new element in line
                     case '+':
-                        if (sValue.Length > 0) { q.Enqueue(sValue); Console.WriteLine($"{sValue} was Added to Queue and is now last of {q.Count} elements: "); }
+                        if (sValue.Length > 0) { q.Enqueue(sValue); Console.WriteLine($"{sValue} was Added to Queue and is now last of {q.Count} elements: ");
+                            //prints content of list
+                            foreach (var item in q) { Console.WriteLine($"({item})"); } }
                         else if (sValue.Length < 1) { Console.WriteLine($"Nothing was Added after you typed + \nDo it Again!"); }
-                        foreach (var item in q){Console.WriteLine($"({item})");}
+                        
                         break;
 
                     //remove element from list
                     case '-':
-                        if (q.Count > 0) { string toBeRemoved = q.Dequeue(); Console.WriteLine($"{toBeRemoved} was Removed from Queue, now {q.Count} elements in the Queue");}
+                        if (q.Count > 0) { string toBeRemoved = q.Dequeue(); Console.WriteLine($"{toBeRemoved} was Removed from Queue, now {q.Count} elements in the Queue"); 
+                            foreach (var item in q) { Console.WriteLine($"({item})"); } }
                         else if (q.Count < 1) { Console.WriteLine($"{q.Count} elements in the Queue.... Seems hard to remove someone from queue now"); }
-                        foreach (var item in q) { Console.WriteLine($"({item})"); }
+                        
                         break;
                     //user inputs something to exit to main menue.
                     case '0':
@@ -205,17 +198,16 @@ namespace SkalProj_Datastrukturer_MinneÖvning4
              {
                     //cases to push items
                     case '+':
-                        if (sValue.Length > 0) { s.Push(sValue); Console.WriteLine($"{sValue} was Added to Stack and is now last of {s.Count} elements:"); }
+                        if (sValue.Length > 0) { s.Push(sValue); Console.WriteLine($"{sValue} was Added to Stack and is now last of {s.Count} elements:");
+                            //prints content of list
+                            foreach (var item in s) { Console.WriteLine($"({item})"); } }
                         else if (sValue.Length < 1) { Console.WriteLine($"Nothing was Added after you typed + \nDo it Again!"); }
                         break;
-
-                        //prints content of list
-                        //foreach (var item in s.p){ Console.WriteLine($"({item})"); }
                     //cases to pop items
                     case '-':
-                        if (s.Count > 0) { string poped = s.Pop(); Console.WriteLine($"{poped} was Removed from Stack, now {s.Count} elements in the Stack"); }
+                        if (s.Count > 0) { string poped = s.Pop(); Console.WriteLine($"{poped} was Removed from Stack, now {s.Count} elements: "); 
+                            foreach (var item in s) { Console.WriteLine($"({item})"); } }
                         else if (s.Count < 1) { Console.WriteLine($"{s.Count} elements in the Stack.... Seems hard to remove someone from stack now"); }
-
                         break;
                     //user inputs something to exit to main menue.
                     case '0':
