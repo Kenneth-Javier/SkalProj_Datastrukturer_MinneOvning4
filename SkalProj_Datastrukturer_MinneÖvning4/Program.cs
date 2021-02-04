@@ -68,7 +68,7 @@ namespace SkalProj_Datastrukturer_MinneÖvning4
           string input;
           char firstChar;
           string sValue;
-          Console.WriteLine($"Use + or - before name. Examle: (+Adam) to Add or (-Adam) to Remove Adam \nUse 0 to quit");
+          Console.WriteLine($"***Examine a List***\nUse + or - before name. Examle: (+Adam) to Add or (-Adam) to Remove Adam \nUse 0 to quit");
           // Loop this method untill the user inputs something to exit to main menue.
           do
           {
@@ -116,8 +116,7 @@ namespace SkalProj_Datastrukturer_MinneÖvning4
                   case '0':
                       Console.WriteLine("0 exit to main menue.");
                       menuIsRunning = false;
-                        //Environment.Exit(0);
-                        Main();
+                      Main();
                       break;
           
                   default:
@@ -130,8 +129,8 @@ namespace SkalProj_Datastrukturer_MinneÖvning4
         /// <summary>
         /// Examines the datastructure Queue
         /// </summary>
-        static void ExamineQueue()
-        {
+      static void ExamineQueue()
+      {
             /*
              * Loop this method untill the user inputs something to exit to main menue.
              * Create a switch with cases to enqueue items or dequeue items
@@ -143,7 +142,7 @@ namespace SkalProj_Datastrukturer_MinneÖvning4
             string input;
             char firstChar;
             string sValue;
-            Console.WriteLine($"Use; + before name \nUse: - to remove first name from line \nUse: 0 to Quit");
+            Console.WriteLine($"***Examine a Queue***\nUse; + before name \nUse: - to remove first name from line \nRemember -First in -First Out \nUse: 0 to Quit");
             do
             {
                 input = Console.ReadLine();
@@ -154,22 +153,21 @@ namespace SkalProj_Datastrukturer_MinneÖvning4
                 {
                     //add new element in line
                     case '+':
-                        if (sValue.Length > 0) { q.Enqueue(sValue); Console.WriteLine($"{sValue} was Added to Queue and is now last of {q.Count} elements:"); }
+                        if (sValue.Length > 0) { q.Enqueue(sValue); Console.WriteLine($"{sValue} was Added to Queue and is now last of {q.Count} elements: "); }
                         else if (sValue.Length < 1) { Console.WriteLine($"Nothing was Added after you typed + \nDo it Again!"); }
+                        foreach (var item in q){Console.WriteLine($"({item})");}
                         break;
 
                     //remove element from list
                     case '-':
-                        if (q.Count > 0)
-                        { string toBeRemoved = q.Dequeue(); Console.WriteLine($"{toBeRemoved} was Removed from Queue, now {q.Count} elements in the Queue");}
+                        if (q.Count > 0) { string toBeRemoved = q.Dequeue(); Console.WriteLine($"{toBeRemoved} was Removed from Queue, now {q.Count} elements in the Queue");}
                         else if (q.Count < 1) { Console.WriteLine($"{q.Count} elements in the Queue.... Seems hard to remove someone from queue now"); }
-
+                        foreach (var item in q) { Console.WriteLine($"({item})"); }
                         break;
                     //user inputs something to exit to main menue.
                     case '0':
                         Console.WriteLine("0 exit to main menue.");
                         menuIsRunning = false;
-                        //Environment.Exit(0);
                         Main();
                         break;
 
@@ -177,20 +175,60 @@ namespace SkalProj_Datastrukturer_MinneÖvning4
                         Console.WriteLine($"Use only + before name \nor - to remove first name from line \nUse 0 to Quit");
                         break;
                 }
-
             } while (menuIsRunning == true);
-        }
+      }
 
         /// <summary>
         /// Examines the datastructure Stack
         /// </summary>
-        static void ExamineStack()
+      static void ExamineStack()
       {
-          /*
-           * Loop this method until the user inputs something to exit to main menue.
-           * Create a switch with cases to push or pop items
-           * Make sure to look at the stack after pushing and and poping to see how it behaves
-          */
+            /*
+             * Loop this method until the user inputs something to exit to main menue.
+             * Create a switch with cases to push or pop items
+             * Make sure to look at the stack after pushing and and poping to see how it behaves
+            */
+              Stack<string> s = new Stack<string> { };
+         bool menuIsRunning = true;
+         string input;
+         char firstChar;
+         string sValue;
+         Console.WriteLine($"***Examine a Stack***\nUse; + before name \nUse: - to remove last name from line \nRemember -First In -Last Out \nUse: 0 to Quit");
+         do
+         {
+                
+             input = Console.ReadLine();
+             firstChar = input[0];
+             sValue = input.Substring(1);
+
+             switch (firstChar)
+             {
+                    //cases to push items
+                    case '+':
+                        if (sValue.Length > 0) { s.Push(sValue); Console.WriteLine($"{sValue} was Added to Stack and is now last of {s.Count} elements:"); }
+                        else if (sValue.Length < 1) { Console.WriteLine($"Nothing was Added after you typed + \nDo it Again!"); }
+                        break;
+
+                        //prints content of list
+                        //foreach (var item in s.p){ Console.WriteLine($"({item})"); }
+                    //cases to pop items
+                    case '-':
+                        if (s.Count > 0) { string poped = s.Pop(); Console.WriteLine($"{poped} was Removed from Stack, now {s.Count} elements in the Stack"); }
+                        else if (s.Count < 1) { Console.WriteLine($"{s.Count} elements in the Stack.... Seems hard to remove someone from stack now"); }
+
+                        break;
+                    //user inputs something to exit to main menue.
+                    case '0':
+                    Console.WriteLine("0 exit to main menue.");
+                    menuIsRunning = false;
+                    Main();
+                    break;
+
+                 default:
+                    Console.WriteLine($"Use only + before name \nor - to remove last name from line \nUse 0 to Quit");
+                    break;
+             }
+          } while (menuIsRunning == true);
       }
 
       static void CheckParanthesis()
