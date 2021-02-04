@@ -83,7 +83,8 @@ namespace SkalProj_Datastrukturer_MinneÖvning4
                   case '+':      // '+': Add the rest of the input to the list (The user could write +Adam and "Adam" would be added to the list)
                       if (sValue.Length > 0)
                       {   //Adds value by String content
-                          theList.Add(sValue); Console.WriteLine($"( {sValue} ) has been added to the list\n List capacity {theList.Capacity}, \nList content of {theList.Count} elements:");// In both cases, look at the count and capacity of the list
+                          theList.Add(sValue); Console.WriteLine($"( {sValue} ) has been added to the list\n List capacity {theList.Capacity}, "
+                               + $"\nList content of {theList.Count} elements:");// In both cases, look at the count and capacity of the list
                           //prints content of list
                           foreach (var item in theList){ Console.WriteLine($"({item})");}
                       }
@@ -132,7 +133,8 @@ namespace SkalProj_Datastrukturer_MinneÖvning4
             string input;
             char firstChar;
             string sValue;
-            Console.WriteLine($"***Examine a Queue***\nUse; + before name \nUse: - to remove first name from line \nRemember -First in -First Out \nUse: 0 to Quit");
+            Console.WriteLine($"***Examine a Queue***\nUse; + before name \nUse: - to remove first name from line " 
+               + $"\nRemember -First in -First Out \nUse: 0 to Quit");
             do
             {
                 input = Console.ReadLine();
@@ -186,10 +188,14 @@ namespace SkalProj_Datastrukturer_MinneÖvning4
          string input;
          char firstChar;
          string sValue;
-         Console.WriteLine($"***Examine a Stack***\nUse; + before name \nUse: - to remove last name from line \nRemember -First In -Last Out \nUse: 0 to Quit");
+         Console.WriteLine($"***Examine a Stack***"
+             + "\n$Remember -First In -Last Out "
+             + "\n$Use: + before name "
+             + "\n$Use: - to remove last name from line "
+             + "\n$Use: 1 before you write something and get it back reverse"
+             + "\n$Use: 0 to Quit");
          do
          {
-                
              input = Console.ReadLine();
              firstChar = input[0];
              sValue = input.Substring(1);
@@ -197,28 +203,42 @@ namespace SkalProj_Datastrukturer_MinneÖvning4
              switch (firstChar)
              {
                     //cases to push items
-                    case '+':
-                        if (sValue.Length > 0) { s.Push(sValue); Console.WriteLine($"{sValue} was Added to Stack and is now last of {s.Count} elements:");
-                            //prints content of list
-                            foreach (var item in s) { Console.WriteLine($"({item})"); } }
-                        else if (sValue.Length < 1) { Console.WriteLine($"Nothing was Added after you typed + \nDo it Again!"); }
-                        break;
-                    //cases to pop items
-                    case '-':
-                        if (s.Count > 0) { string poped = s.Pop(); Console.WriteLine($"{poped} was Removed from Stack, now {s.Count} elements: "); 
-                            foreach (var item in s) { Console.WriteLine($"({item})"); } }
-                        else if (s.Count < 1) { Console.WriteLine($"{s.Count} elements in the Stack.... Seems hard to remove someone from stack now"); }
-                        break;
-                    //user inputs something to exit to main menue.
-                    case '0':
-                    Console.WriteLine("0 exit to main menue.");
-                    menuIsRunning = false;
-                    Main();
+                case '+':
+                    if (sValue.Length > 0) { s.Push(sValue); Console.WriteLine($"{sValue} was Added to Stack and is now last of {s.Count} elements:");
+                        //prints content of list
+                        foreach (var item in s) { Console.WriteLine($"({item})"); } }
+                    else if (sValue.Length < 1) { Console.WriteLine($"Nothing was Added after you typed + \nDo it Again!"); }
                     break;
+                //cases to pop items
+                case '-':
+                    if (s.Count > 0) { string poped = s.Pop(); Console.WriteLine($"{poped} was Removed from Stack, now {s.Count} elements: "); 
+                        foreach (var item in s) { Console.WriteLine($"({item})"); } }
+                    else if (s.Count < 1) { Console.WriteLine($"{s.Count} elements in the Stack.... Seems hard to remove someone from stack now"); }
+                    break;
+                //loops strings back reverse
+                case '1':
+                    if (sValue.Length > 0)
+                    {   Console.WriteLine($"reverse: ");
+                        for (int i = 0; i < sValue.Length; i++){ char c = sValue[i]; string sx = c.ToString(); s.Push(sx);}
+                        foreach (var item in s) { Console.Write($"{item}");}
+                        s.Clear();
+                    }
+                    else if (sValue.Length < 1) { Console.WriteLine($"Nothing was Added after you typed 1 \nDo it Again!"); }
+                    break;
+                //user inputs something to exit to main menue.
+                case '0':
+                Console.WriteLine("0 exit to main menue.");
+                menuIsRunning = false;
+                Main();
+                break;
 
-                 default:
-                    Console.WriteLine($"Use only + before name \nor - to remove last name from line \nUse 0 to Quit");
-                    break;
+                default:
+                Console.WriteLine($"Use only:"
+                   + "\n$ + before name"
+                   + "\n$ - to remove last name from line "
+                   + "\n$ 1 before you write something and get it back reverse"
+                   + "\n$ 0 to Quit");
+                break;
              }
           } while (menuIsRunning == true);
       }
