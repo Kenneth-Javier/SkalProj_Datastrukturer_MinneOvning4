@@ -68,14 +68,16 @@ namespace SkalProj_Datastrukturer_MinneÖvning4
           string input;
           char firstChar;
           string sValue;
-          Console.WriteLine($"***Examine a List***\nUse + or - before name. Examle: (+Adam) to Add or (-Adam) to Remove Adam \nUse 0 to quit");
+          Console.WriteLine($"***Examine a List***" 
+             + $"\nUse + or - before name. " 
+             + $"Examle: (+Adam) to Add or (-Adam) to Remove Adam "
+             + $"\nUse 0 exit to main menue.");
           // Loop this method untill the user inputs something to exit to main menue.
           do
           {
               input = Console.ReadLine();
               firstChar = input[0];
               sValue = input.Substring(1);
-          
           
               // Create a switch statement with cases '+' and '-'
               switch (firstChar)
@@ -111,7 +113,7 @@ namespace SkalProj_Datastrukturer_MinneÖvning4
                       break;
           
                   default:
-                      Console.WriteLine($"Use only + or - before name. Examle: (+Adam) to add or (-Adam) to remove Adam \nUse 0 to Quit");
+                      Console.WriteLine($"Use only + or - before name. Examle: (+Adam) to add or (-Adam) to remove Adam \nUse 0 exit to main menue.");
                       break;
               }
           } while (menuIsRunning == true);
@@ -134,7 +136,7 @@ namespace SkalProj_Datastrukturer_MinneÖvning4
             char firstChar;
             string sValue;
             Console.WriteLine($"***Examine a Queue***\nUse; + before name \nUse: - to remove first name from line " 
-               + $"\nRemember -First in -First Out \nUse: 0 to Quit");
+               + $"\nRemember -First in -First Out \nUse: 0 exit to main menue.");
             do
             {
                 input = Console.ReadLine();
@@ -167,7 +169,9 @@ namespace SkalProj_Datastrukturer_MinneÖvning4
                         break;
 
                     default:
-                        Console.WriteLine($"Use only + before name \nor - to remove first name from line \nUse 0 to Quit");
+                        Console.WriteLine($"Use only + before name " 
+                           + $"\nor - to remove first name from line " 
+                           + $"\nUse 0 exit to main menue.");
                         break;
                 }
             } while (menuIsRunning == true);
@@ -193,7 +197,7 @@ namespace SkalProj_Datastrukturer_MinneÖvning4
              + "\n$Use: + before name "
              + "\n$Use: - to remove last name from line "
              + "\n$Use: 1 before you write something and get it back reverse"
-             + "\n$Use: 0 to Quit");
+             + "\n$Use: 0 exit to main menue.");
          do
          {
              input = Console.ReadLine();
@@ -237,21 +241,86 @@ namespace SkalProj_Datastrukturer_MinneÖvning4
                    + "\n$ + before name"
                    + "\n$ - to remove last name from line "
                    + "\n$ 1 before you write something and get it back reverse"
-                   + "\n$ 0 to Quit");
+                   + "\n$ 0 exit to main menue.");
                 break;
              }
           } while (menuIsRunning == true);
       }
 
-      static void CheckParanthesis()
-      {
-          /*
-           * Use this method to check if the paranthesis in a string is Correct or incorrect.
-           * Example of correct: (()), {}, [({})],  List<int> list = new List<int>() { 1, 2, 3, 4 };
-           * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
-           */
+        static void CheckParanthesis()
+        {
+            /*
+             * Use this method to check if the paranthesis in a string is Correct or incorrect.
+             * Example of correct: (()), {}, [({})],  List<int> list = new List<int>() { 1, 2, 3, 4 };
+             * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
+             */
+            bool menuIsRunning = true;
+            string input;
+            int i = 0;
+            char firstChar;
+            string correct = "Example of correct: (()), { }, [({ })],  List<int> list = new List<int>() { 1, 2, 3, 4 };";
+            string incorrect = "Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );";
+            
+            Stack<char> ExpectedParanthesisStack = new Stack<char> { };
+            Dictionary<char, char> ParanthesisDictionary = new Dictionary<char, char>  {
+                 { '(',')' }, //   Parentheses()
+                 { '[',']' }, //   Brackets[]
+                 { '{','}' }  //   Braces {}
+            };
 
-      }
-   }
+            Console.WriteLine($"***CheckParanthesis***"
+             + "\n$Check if the paranthesis in a string is Correct or incorrect "
+             + "\n$Use: 1 To write something with paranthesis"
+             + "\n$Use: 0 exit to main menue.");
 
+            do
+            {
+                input = Console.ReadLine();
+                firstChar = input[0];
+                switch (firstChar)
+                {
+                    case ('1'):
+                        bool isParanthesisCorrect = true;
+                        Console.WriteLine($"Write something with paranthesis"
+                            + "\n$ { () } Parentheses "
+                            + "\n$ { [] }Brackets"
+                            + "\n$ { {} } Braces");
+                        input = Console.ReadLine();
+
+                        if (input.Contains('(') || input.Contains(')')
+                            || input.Contains('[') || input.Contains(']') 
+                            || input.Contains('{') || input.Contains('}'))
+                        {
+                           foreach (char c in input)
+                           {
+                               if (ParanthesisDictionary.ContainsKey(c))
+                               {ExpectedParanthesisStack.Push(ParanthesisDictionary[c]);}
+                               if (ParanthesisDictionary.ContainsValue(c))
+                               {if (c == ExpectedParanthesisStack.Peek()) { ExpectedParanthesisStack.Pop(); }
+                                   else if (c != ExpectedParanthesisStack.Peek()) { isParanthesisCorrect = false; }
+                               } i++;
+                           }if(ExpectedParanthesisStack.Count != 0) { isParanthesisCorrect = false; }
+                            Console.WriteLine($"You Writed: " + input);
+                            if (isParanthesisCorrect){Console.WriteLine($"The paranthesis you writed is Correct");
+                            }else if (!isParanthesisCorrect){Console.WriteLine($"The paranthesis you writed is inCorrect");}
+                        }
+                        else { Console.WriteLine($"Write something with paranthesis "); }
+
+                        
+                        break;
+                    case '0':
+                        Console.WriteLine("0 exit to main menue.");
+                        menuIsRunning = false;
+                        Main();
+                        break;
+
+                    default:
+                        Console.WriteLine($"Use only:"
+                           + "\n$ 1 To write something with paranthesis "
+                           + "\n$ 0 exit to main menue.");
+                        break;
+                }
+            } while (menuIsRunning);
+        }
+    }
 }
